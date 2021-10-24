@@ -6,24 +6,23 @@ import BreadCrumbs from "../Breadcrumbs";
 /**
  * Study deck screen is displayed at '/decks/:deckId/study'
  * Displays front & back of deck cards one at a time
- * Each card includes btns 'Flip' or 'Next'
+ * Each card includes action btns (flip, next)
  */
 
 const StudyDeck = () => {
-  // initialize state + setter to hold deck
+  // Initiate state and setter for deck and cards
   const [deck, setDeck] = useState({ name: "", cards: [] });
-  // initialize state + setter to hold card
+  // Initiate state and setter for card (front, back, flip, index)
   const [selectedCard, setSelectedCard] = useState({ front: "", back: "" });
-  // initialize state + setter to hold flipped card
   const [isFlipped, setIsFlipped] = useState(false);
-  // initialize state + setter to hold selected index card
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  // retrieves deck w/specified `deckId`
+  // Initiate Hook to retrieve specified deck
   const { deckId } = useParams();
-  const history = useHistory(); // create history obj
+  // Initiate Hook to navigate user to appropriate screen
+  const history = useHistory();
 
-  // use readDeck() to get deck being studied & set to state
+  // Hook to retrieve deck & set to state
   useEffect(() => {
     const abortController = new AbortController();
     readDeck(deckId)
@@ -33,14 +32,14 @@ const StudyDeck = () => {
     return abortController.abort();
   }, [deckId, setDeck]);
 
-  // get deck cards at indx & set to state
+  // Hook to retrieve deck cards
   useEffect(() => {
     if (deck.cards.length > 0) {
       setSelectedCard(deck.cards[selectedIndex]);
     }
   }, [deck, selectedIndex]);
 
-  // display msg if deck includes 2 cards or less & btn to add cards to deck
+  // Handle decks w/less than 2 cards w/action btn (add cards)
   if (deck.cards.length <= 2) {
     return (
       <div>
@@ -58,7 +57,7 @@ const StudyDeck = () => {
     );
   }
 
-  // front of the card
+  // Front of the deck card
   const frontCard = (
     <div className="card-body">
       <h5 className="card-title">
@@ -77,7 +76,7 @@ const StudyDeck = () => {
     </div>
   );
 
-  // back of the card
+  // Back of the deck card
   const backCard = (
     <div className="card-body">
       <h5 className="card-title">

@@ -5,21 +5,20 @@ import BreadCrumbs from "../Breadcrumbs";
 
 /**
  * Edit deck screen is displayed at '/decks/:deckId/edit'
- * Allows user to modify info on an existing deck
- * Includes pre-filled form w/info for existing deck to edit
+ * Allows user to modify info on an existing deck using form
  */
 
 const EditDeck = () => {
-  // initialize state + setter to hold deck name
+  // Initiate state and setter for deck name & description
   const [deckName, setDeckName] = useState("");
-  // initialize state + setter to hold deck description
   const [deckDescription, setDeckDescription] = useState("");
 
-  // retrieves deck w/specified `deckId`
+  // Initiate Hook for specified deck
   const { deckId } = useParams();
-  const history = useHistory(); // create history obj
+  // Initiate Hook to navigate user to appropriate path
+  const history = useHistory();
 
-  // use readDeck() to get deck & set states
+  // Hook to retrieve deck & set to state
   useEffect(() => {
     const abortController = new AbortController();
 
@@ -28,26 +27,26 @@ const EditDeck = () => {
         setDeckName(data.name);
         setDeckDescription(data.description);
       })
-      .catch((error) => console.log(error));
 
+      .catch((error) => console.log(error));
     return abortController.abort();
   }, [deckId]);
 
-  // func to handle submission of form to update deck
+  // Submit handler to update deck and send user to deck screen
   const handleSubmit = async (e) => {
     e.preventDefault();
     const abortController = new AbortController();
     const signal = abortController.signal;
 
-    // response either shows true or false per user input
     const response = await updateDeck(
       { id: deckId, name: deckName, description: deckDescription },
       signal
     );
+
     history.push(`/decks/${response.id}`);
   };
 
-  // func to handle 'cancel' of form to update deck
+  // Send user to previous screen when action cancels
   const handleCancel = () => {
     history.goBack();
   };

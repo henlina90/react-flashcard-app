@@ -6,30 +6,30 @@ import CardForm from "../CardForm";
 
 /**
  * Edit card screen is displayed at '/decks/:deckId/cards/:cardId/edit'
- * allows user to modify info on card
- * form is pre-filled w/info for existing card
+ * Allows user to modify info on card using form
  */
 
 const EditCard = () => {
-  // initialize state + setter to hold deck name
+  // Initiate state and setter for deck name
   const [deckName, setDeckName] = useState("");
-  // initialize state + setter to hold front of card
+
+  // Initiate state and setter for cards (front, back)
   const [front, setFront] = useState("");
-  // initialize state + setter to hold back of card
   const [back, setBack] = useState("");
 
-  // retrieves deck w/specified `deckId`
+  // Initiate Hook to retrieve specified deck cards
   const { deckId, cardId } = useParams();
-  const history = useHistory(); // create history obj
 
-  // use readDeck() to get deck of card to edit & set to state
+  // Initiate Hook to navigate user to appropriate screen
+  const history = useHistory();
+
+  // Hook to retrieve card of deck & set to state
   useEffect(() => {
     const abortController = new AbortController();
     readDeck(deckId)
       .then(async (data) => {
         setDeckName(data.name);
 
-        // use readCard() to get card to edit & set to state
         const card = await readCard(cardId);
         const { back, front } = card;
         setFront(front);
@@ -40,7 +40,7 @@ const EditCard = () => {
     return () => abortController.abort();
   }, [deckId, cardId]);
 
-  // use updateCard() & func to handle submission of form to update card
+  // Submit handler to update card and send user to previous screen
   const handleSubmit = async (e) => {
     e.preventDefault();
     const abortController = new AbortController();
@@ -54,7 +54,7 @@ const EditCard = () => {
     history.goBack();
   };
 
-  // func to handle 'cancel' of form to update card
+  // Send user to previous screen when user cancels
   const handleCancel = () => {
     history.goBack();
   };

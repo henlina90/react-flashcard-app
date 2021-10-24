@@ -7,17 +7,17 @@ import BreadCrumbs from "../Breadcrumbs";
 /**
  * Create deck screen is displayed at 'decks/new'
  * The Home screen has a 'Create Deck' btn
- * Allows user to create new deck
- * Includes a form w/ fields to create a new deck
+ * Allows user to create new deck using form
  */
 
 const CreateDeck = () => {
-  // used custom hook for form
+  // Use custom Hook to create deck
   const [values, handleChange] = useForm({ name: "", description: "" });
 
-  const history = useHistory(); // create history obj
+  // Initiate Hook to navigate user to appropriate screen
+  const history = useHistory();
 
-  // func to handle submission of form to create new deck
+  // Submit handler create deck & sends user to deck screen
   const handleSubmit = async (e) => {
     e.preventDefault();
     const abortController = new AbortController();
@@ -27,7 +27,7 @@ const CreateDeck = () => {
     history.push(`/decks/${res.id}`);
   };
 
-  // func to handle cancellation of form to create new deck
+  // Sends user to home screen when form is canceld
   const handleCancel = () => {
     history.push("/");
   };

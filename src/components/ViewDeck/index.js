@@ -11,28 +11,27 @@ import BreadCrumbs from "../Breadcrumbs";
  */
 
 const ViewDeck = () => {
-  // initial states + setter to hold the cards
+  // Initiate state and setter for cards
   const [cards, setCards] = useState([]);
-  // initial states + setter to hold selected deck name & description
+  // Initiate state and setter for deck details
   const [deck, setDeck] = useState({ id: "", name: "", description: "" });
-  // destructuring id, name, description from deck
-  const { id, name, description } = deck;
 
-  // retrieves deck w/specified `deckId`
+  // Initiate Hook to retrieve specified deck
   const { deckId } = useParams();
-  const history = useHistory(); // creates history obj
+  // Initiate Hook to navigate user to appropriate screen
+  const history = useHistory();
 
-  // func to handle delete for deck
+  // Delete handler allows user to confirm action & send user home
   const handleDelete = (id) => {
-    // response either shows true or false per user input
-    const response = window.confirm("Are you sure you want to delete?");
-    if (response) {
+    const message = "Are you sure you want to delete?";
+    const confirmDelete = window.confirm(message);
+    if (confirmDelete) {
       deleteDeck(deckId);
       history.push("/");
     }
   };
 
-  // use readDeck() to get deck & set to state
+  // Hook to retrieve deck & set to state
   useEffect(() => {
     const abortController = new AbortController();
 
@@ -43,7 +42,7 @@ const ViewDeck = () => {
     return abortController.abort();
   }, [deckId, setDeck]);
 
-  // get deck cards & set to state
+  // Hook to retrieve deck cards & set to state
   useEffect(() => {
     const abortController = new AbortController();
 
@@ -56,9 +55,9 @@ const ViewDeck = () => {
 
   return (
     <div className="mb-2">
-      <BreadCrumbs crumbs={[name]} />
-      <h3>{name}</h3>
-      <p>{description}</p>
+      <BreadCrumbs crumbs={[deck.name]} />
+      <h3>{deck.name}</h3>
+      <p>{deck.description}</p>
       <Link to={`/decks/${deckId}/edit`}>
         <button className="btn btn-secondary mr-2">Edit</button>
       </Link>
@@ -70,10 +69,7 @@ const ViewDeck = () => {
       </Link>
       <button
         className="btn btn-danger float-right margin-bottom"
-        onClick={(e) => {
-          e.preventDefault();
-          handleDelete(id);
-        }}
+        onClick={handleDelete}
       >
         Delete
       </button>

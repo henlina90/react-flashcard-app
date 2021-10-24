@@ -7,22 +7,22 @@ import CardForm from "../CardForm";
 /**
  * Add card screen is displayed at '/decks/:deckId/cards/new'
  * Allows user to add new card to an existing deck using form
- * Shares the same form component w/Edit card screen
+ * Requirements: shares the same form component w/Edit card screen
  */
 
 const AddCard = () => {
-  // initialize deck + setter to hold card
+  // Initiate state and setter for deck (name)
   const [deck, setDeck] = useState({ name: "" });
-  // initialize deck + setter to hold front of card
+  // Initiate state and setter for card (front, back)
   const [front, setFront] = useState("");
-  // initialize deck + setter to hold front of card
   const [back, setBack] = useState("");
 
-  // retrieves deck w/specified `deckId`
+  // Initiate Hook to retrieve deck by id
   const { deckId } = useParams();
-  const history = useHistory(); // create history obj
+  // Initiate Hook to navigate user to appropriate path
+  const history = useHistory();
 
-  // use readDeck() to get deck & set to state
+  // Hook to retrieve deck of card & set to state
   useEffect(() => {
     const abortController = new AbortController();
     readDeck(deckId)
@@ -32,7 +32,7 @@ const AddCard = () => {
     return abortController.abort();
   }, [deckId, setDeck]);
 
-  // func to handle 'save' of form to add new card
+  // Submit handler: create card (front, back)
   const handleSubmit = async (e) => {
     e.preventDefault();
     const abortController = new AbortController();
@@ -43,7 +43,7 @@ const AddCard = () => {
     setBack("");
   };
 
-  // func to handle 'done' of form to add new card
+  // Sends user to previous screen when done
   const handleDone = () => {
     history.goBack();
   };

@@ -1,30 +1,37 @@
-// * HOME SCREEN DISPLAYS DECK LIST * //
-
 import React, { useEffect, useState } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
 import { listDecks, deleteDeck } from "../../utils/api";
 import Deck from "./Deck";
 
+/**
+ * Home screen: the first screen user sees
+ * Displays list of existing decks
+ * Includes action btn: Create Deck
+ */
+
 const DeckList = () => {
-  // useState Hook for deck list
+  // Initiate state and setter for deck list
   const [decks, setDecks] = useState([]);
+
+  // Initiate Hook to retrieve specified deck
   const { deckId } = useParams();
-  // use Hook to send user home
+
+  // Initiate Hook to send user appropriate path
   const history = useHistory();
 
-  // Delete handler either deletes deck & reload OR sends user home
+  // Delete handler either deletes deck & reload or sends user home
   const handleDelete = () => {
     const message = "Are you sure you want to delete?";
-    const deleteDeckPrompt = window.confirm(message);
+    const confirmDelete = window.confirm(message);
 
-    if (deleteDeckPrompt === true) {
+    if (confirmDelete === true) {
       deleteDeck(deckId) && window.location.reload();
     } else {
       history.push("/");
     }
   };
 
-  // useEffect Hook to retrieve all existing decks
+  // Hook to retrieve all existing decks & set to state
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;
@@ -36,7 +43,8 @@ const DeckList = () => {
     return controller.abort();
   }, [deckId, setDecks]);
 
-  const listOfDecks = decks.map((deck) => {
+  // List of decks
+  const renderDeckList = decks.map((deck) => {
     return <Deck key={deck.id} deck={deck} handleDelete={handleDelete} />;
   });
 
@@ -47,7 +55,7 @@ const DeckList = () => {
           + Create Deck
         </button>
       </Link>
-      <div>{listOfDecks}</div>
+      <div>{renderDeckList}</div>
     </div>
   );
 };

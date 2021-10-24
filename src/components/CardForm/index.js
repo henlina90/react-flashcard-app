@@ -1,10 +1,6 @@
 import React from "react";
 
-/**
- * Card form to edit or create card
- * Required for Edit & Create card screens to share same form component
- */
-
+// Card form used to edit or create card
 const CardForm = ({
   handleSubmit,
   handleExit,
