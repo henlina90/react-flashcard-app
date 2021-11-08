@@ -13,11 +13,11 @@ const DeckList = () => {
   const history = useHistory();
 
   // Delete handler either deletes deck & reload OR sends user home
-  const handleDelete = () => {
+  const handleDelete = (deckId) => {
     const message = "Are you sure you want to delete?";
     const deleteDeckPrompt = window.confirm(message);
 
-    if (deleteDeckPrompt === true) {
+    if (deleteDeckPrompt) {
       deleteDeck(deckId) && window.location.reload();
     } else {
       history.push("/");

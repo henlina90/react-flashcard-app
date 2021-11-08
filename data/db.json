@@ -14,11 +14,6 @@
       "id": 3,
       "name": "React Hooks",
       "description": "Hooks allow you to use JavaScript functions to create React components in a more simple way and help reduce a lot of boilerplate code."
-    },
-    {
-      "id": 4,
-      "name": "TEST ME",
-      "description": "TEST"
     }
   ],
   "cards": [
@@ -63,12 +58,6 @@
       "back": "The 'useEffect' hook lets us put \"side effects\" when a component's variables or state changes based on some outside thing.",
       "deckId": 3,
       "id": 8
-    },
-    {
-      "id": 9,
-      "front": "TEST ME",
-      "back": "TEST, TESTING, TESTER, TESTS",
-      "deckId": 4
     }
   ]
 }

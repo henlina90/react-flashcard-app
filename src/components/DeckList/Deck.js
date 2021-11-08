@@ -22,7 +22,7 @@ const Deck = ({ deck, handleDelete }) => {
         </Link>
         <button
           className="btn btn-danger float-right margin-bottom"
-          onClick={handleDelete}
+          onClick={() => handleDelete(deck.id)}
         >
           Delete
         </button>
