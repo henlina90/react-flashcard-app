@@ -24,6 +24,7 @@ const CreateDeck = () => {
     const signal = abortController.signal;
 
     const res = await createDeck(values, signal);
+    console.log({ here: "here" });
     history.push(`/decks/${res.id}`);
   };
 
