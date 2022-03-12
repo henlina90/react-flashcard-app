@@ -1,23 +1,28 @@
-# Project description: Flashcard-o-matic
+# Study Tool Application: Flashcard-o-matic
 
 ### Summary
 
-Flashcard-o-matic is a web application that allows users to create, edit, and study decks of flashcards using React function components.
+Flashcard application that allows users to create, edit, delete, and study decks and cards.
 
-- Developed a full-stack application that uses CRUD operations
-- Implemented multiple screens using function components and hooks
-- Configured routes including nested routes using React Router
+### Highlights
 
-### Technologies
+* Full-stack application that uses CRUD operations
+* Implementation of multiple screens using React function components and React Hooks
+* Configuration of routes including nested routes using React Router
 
-JavaScript, React, React Hooks, React Router, HTML, CSS, Bootsrap 4
+### Key Technologies 
+
+* JavaScript
+* React, React Hooks & React Router
+* HTML
+* CSS
+* Bootstrap
 
 ### Installation
 
 1. Fork / clone this repository
-1. Run `npm install`
-
-Use `npm start` to run the application
+2. Run `npm install`
+3. Run `npm start`
 
 Set the `API_BASE_URL` environment variable to the base url for the API
 
@@ -98,7 +103,3 @@ The Edit Deck screen has the following features:
 - It displays the same form as the Add Card screen, except it is pre-filled with information for the existing card. It can be edited and updated
 - If the user clicks on either "Save" or "Cancel", the user is taken to the Deck screen
 <img src="https://github.com/AudreyMargolis/ProjectFlashCards/blob/master/cd6a1f07574bf8544b0a30d45020a274-card-edit.png" />
-  
-### Future Plans: 
-
-Refactor code, deploy
